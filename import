@@ -1,0 +1,12 @@
+
+import pandas as pd
+import numpy as np
+import json
+df_movies = pd.read_csv('movies2bd.csv', encoding = "ISO-8859-1")
+df_movies = df_movies.replace(np.nan, '', regex=True)
+df_rate = pd.read_csv('ratings.csv')
+df_rate.fillna(0, inplace=True)
+df_rate.drop(columns=['timestamp'], inplace=True)
+df_movie_ratings = df_movies.merge(df_rate, on="movieId")
+movies_ratings_json = json.loads(split_df[0].T.to_json()).values()
+
